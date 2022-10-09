@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import CartContext from "../../store/Cart-Context";
 import Model from "../UI/Model";
 import classes from './Cart.module.css'
 
 const Cart = (props) => {
+  const cartCntx = useContext(CartContext);
+  let totalAmount = 0;
+  cartCntx.items.forEach(item=>{
+    totalAmount+=item.price;
+  })
+  
   const cartItems = (
     <ul className={classes["cart-items"]}>
-      {[{ id: "c1", name: "Shushi", amount: 2, price: "$19.99" }].map(
+      {cartCntx.items.map(
         (item) => (
-          <li>{item.name}</li>
+          <li key={item.id}>Name: {item.name}  Price: ${item.price}  Quantity: {item.quantity}</li>
         )
       )}
     </ul>
@@ -17,7 +24,7 @@ const Cart = (props) => {
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>35.62</span>
+        <span>{totalAmount}</span>
       </div>
       <div className={classes.actions}>
         <button className={classes['button--alt']} onClick={props.onClose}>Close</button>
