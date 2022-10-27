@@ -7,13 +7,14 @@ const MealItemForm = (props) => {
   const cartCntx = useContext(CartContext)
   const addItemToCart = (event)=>{
       event.preventDefault();
-      const quantity = document.getElementById('amount_' + props.id).value
+      const quantity = Number(document.getElementById('amount_' + props.id).value)
       cartCntx.addItem({...props.item,quantity:quantity});
   }
   return (
     <form className={classes.form}>
-      <Input
+      <Input 
         label="Amount"
+        
         input={{
           id: 'amount_' + props.id,
           type: "number",
