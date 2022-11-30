@@ -11,19 +11,18 @@ const CartProvider = (props) => {
           if(items[i].id===item.id){
             addIt=false;
             index=i;
+            break;
           }
       }
       if(addIt){
           setItems([...items,item]);
-          setTotalAmount((prevState)=>prevState+item.price*item.quantity)
-          // setTotalAmount(totalAmount+);
+          setTotalAmount((prevState)=>prevState+item.price*item.quantity);
       }
       else{
           let newItem = [...items];
           newItem[index].quantity++;
           setItems([...newItem]);
           setTotalAmount((prevState)=>prevState+item.price);
-          alert('Item is added Successfully!')
       }
   }
     
